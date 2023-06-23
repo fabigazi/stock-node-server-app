@@ -9,16 +9,19 @@ import mongoose from "mongoose";
 
 mongoose.connect(
   "mongodb+srv://Guest:Guest@cluster0.kcmgz9i.mongodb.net/?retryWrites=true&w=majority"
-);
-// mongoose.connect("mongodb://127.0.0.1:27017/tuiter-su1-23");
+)
+  .then(() => console.log('MongoDB Connected...'))
+  .catch(err => console.log(err));
 
 const app = express();
 app.set("trust proxy", 1);
 app.use(
   cors({
     credentials: true,
-    origin: "https://main--warm-cendol-deab82.netlify.app",
-    // origin: "http://localhost:3000",
+    origin: ["https://main--warm-cendol-deab82.netlify.app",
+      "http://localhost:3000",
+      "http://ergast.com/"
+    ]
   })
 );
 app.use(
@@ -50,3 +53,4 @@ TuitsController(app);
 
 const port = process.env.PORT || 4000;
 app.listen(4000);
+console.log(`Running on port ${port}`);
