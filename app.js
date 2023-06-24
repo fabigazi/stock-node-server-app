@@ -1,7 +1,6 @@
-// const express = require("express");
 import UsersController from "./users/users-controller.js";
 import AuthenticationController from "./users/auth-controller.js";
-import TuitsController from "./tuits/tuits-controller.js";
+import SpeedsController from "./speeds/speeds-controller.js";
 import express from "express";
 import cors from "cors";
 import session from "express-session";
@@ -12,6 +11,8 @@ mongoose.connect(
 )
   .then(() => console.log('MongoDB Connected...'))
   .catch(err => console.log(err));
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
 
 const app = express();
 app.set("trust proxy", 1);
@@ -24,6 +25,7 @@ app.use(
     ]
   })
 );
+
 app.use(
   session({
     secret: "any string",
@@ -49,8 +51,10 @@ app.get("/hello/:name", (req, res) => {
 
 UsersController(app);
 AuthenticationController(app);
-TuitsController(app);
+SpeedsController(app);
 
 const port = process.env.PORT || 4000;
 app.listen(4000);
 console.log(`Running on port ${port}`);
+
+
