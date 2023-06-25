@@ -3,15 +3,10 @@ const usersSchema = new mongoose.Schema(
   {
     username: { type: String, required: true, unique: true },
     password: { type: String, required: true },
-    firstName: String,
-    team: {
-      type: String,
-      enum: ["admin", "spectator", "driver"]
-    },
     role: {
       type: String,
       enum: ["admin", "spectator", "driver"],
-      default: "spectator",
+      default: "driver",
     },
     team: {
       type: String,
@@ -26,12 +21,10 @@ const usersSchema = new mongoose.Schema(
         "Alfa Romeo Racing",
         "Williams",
         "Haas F1 Team"
-      ] 
+      ]
     },
-    chat: [{ type: mongoose.Schema.Types.ObjectId, ref: "chat" }],
-    dob: Date,
-    created: { type: Date, default: Date.now },
-    married: { type: Boolean, default: false },
+    // chat: [{ type: mongoose.Schema.Types.ObjectId, ref: "chat" }],
+    created: { type: Date, default: Date.now }
   },
   { collection: "users" }
 );

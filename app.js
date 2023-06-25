@@ -7,36 +7,39 @@ import cors from "cors";
 import session from "express-session";
 import mongoose from "mongoose";
 
+const app = express();
+const port = process.env.PORT || 4000;
+
 mongoose.connect(
   "mongodb+srv://Guest:Guest@cluster0.kcmgz9i.mongodb.net/?retryWrites=true&w=majority"
 )
   .then(() => console.log('MongoDB Connected...'))
   .catch(err => console.log(err));
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
+// var db = mongoose.connection;
+// db.on('error', console.error.bind(console, 'connection error:'));
 
-const app = express();
 app.set("trust proxy", 1);
-app.use(
-  cors({
-    credentials: true,
-    origin: ["https://main--warm-cendol-deab82.netlify.app",
-      "http://localhost:3000",
-      "http://ergast.com/",
-      "https://stock-node-server-app.onrender.com/"
-    ]
-  })
-);
+
+// app.use(
+//   cors({
+//     credentials: true,
+//     origin: [
+//       "https://main--warm-cendol-deab82.netlify.app/"
+//       // "http://ergast.com",
+//       // "https://stock-node-server-app.onrender.com"
+//     ]
+//   })
+// );
 
 app.use(function (req, res, next) {
-  res.header('Access-Control-Allow-Origin', ["https://main--warm-cendol-deab82.netlify.app",
-    "http://localhost:3000"]);
+  res.header('Access-Control-Allow-Origin', "https://main--warm-cendol-deab82.netlify.app");
   res.header(
     'Access-Control-Allow-Headers',
     'Origin, X-Requested-With, Content-Type, Accept'
   );
   next();
 });
+
 
 app.use(
   session({
@@ -66,7 +69,7 @@ AuthenticationController(app);
 SpeedsController(app);
 ChatController(app);
 
-const port = process.env.PORT || 4000;
+
 app.listen(4000);
 console.log(`Running on port ${port}`);
 

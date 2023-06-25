@@ -37,7 +37,7 @@ function AuthenticationController(app) {
       res.sendStatus(403);
     }
   };
-  
+
   const logout = (req, res) => {
     req.session.destroy();
     res.sendStatus(200);
