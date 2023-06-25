@@ -1,6 +1,6 @@
 import * as chatDao from "./chat-dao.js";
 
-function chatController(app) {
+function ChatController(app) {
   const findAllChat = async (req, res) => {
     const speeds = await chatDao.findAllChat();
     res.json(speeds);
@@ -32,4 +32,4 @@ function chatController(app) {
   app.post("/api/chat", createChat);
   app.get("/api/my-chats", findMyChats);
 }
-chatController;
+export default ChatController;
