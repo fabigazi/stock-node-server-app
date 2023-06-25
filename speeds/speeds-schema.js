@@ -3,7 +3,7 @@ const speedsSchema = new mongoose.Schema(
   {
     topic: String,
     title: String,
-    tuit: String,
+    speed: String,
     created: { type: Date, default: Date.now },
     author: { type: mongoose.Schema.Types.ObjectId, ref: "users" },
   },
