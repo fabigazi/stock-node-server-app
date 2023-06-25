@@ -28,6 +28,7 @@ const usersSchema = new mongoose.Schema(
         "Haas F1 Team"
       ] 
     },
+    chat: [{ type: mongoose.Schema.Types.ObjectId, ref: "chat" }],
     dob: Date,
     created: { type: Date, default: Date.now },
     married: { type: Boolean, default: false },
